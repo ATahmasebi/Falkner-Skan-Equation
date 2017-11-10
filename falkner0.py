@@ -4,16 +4,6 @@ Created on Wed Nov  8 22:45:26 2017
 
 @author: Dan
 """
-
-# Exercise 2.13 of Hastings-McLeod:
-# Show that if beta > 0 then the boundary value problem
-#   f"' + f f" + beta(1 - f'^2) =0
-#   f(0) = f'(0) = 0, f'(infinity) = 1
-# has a solution such that f' > 0 on (0,infty).
-# Hint: Suppose that f"(0) = alpha.
-# Vary alpha. Base your shooting sets on the behaviors of f' and f". You may
-# wish to use a numerical ode solver to examine f' for different values of alpha
-#
 # Falkner-Skan equation
 
 import numpy as np

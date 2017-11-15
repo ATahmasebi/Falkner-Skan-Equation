@@ -1,4 +1,4 @@
-function y = BlasiusFunction(eta,f) 
+function y = coupled_equations(eta,f) 
 % f() is a vector containing f and its derivatives. S s=is also in f form:  
 % f = f(1)  f' = f(2) f" = f(3) S=f(4)  S'=f(5)
 % y() is a vector in which derivatives of f() are assigned 

@@ -10,7 +10,7 @@ est_f(1)=0.3; %For falkner equation
 est_s(1)=0.5; % For S equation
 
 % 1st iteration
-[eta,f]=ode45(@BlasiusFunction,eta_span,[0 0 est_f(1) SW est_s(1)]);
+[eta,f]=ode45(@coupled_equations,eta_span,[0 0 est_f(1) SW est_s(1)]);
 targ_f(1)=f(length(f),2);% last value of column 2 (f')
 targ_s(1)=f(length(f),4);% last value of column 4 (S)
 
@@ -18,7 +18,7 @@ targ_s(1)=f(length(f),4);% last value of column 4 (S)
 est_f(2)=0.7;
 est_s(2)=0.6;
 
-[eta,f]=ode45(@BlasiusFunction,eta_span,[0 0 est_f(2) SW est_s(2)]);
+[eta,f]=ode45(@coupled_equations,eta_span,[0 0 est_f(2) SW est_s(2)]);
 targ_f(2)=f(length(f),2);% last value of column 2 f'
 targ_s(2)=f(length(f),4);% last value of column 4 s'
 
@@ -29,7 +29,7 @@ B=(targ_s(1)-0)/(0-targ_s(2)); % for boundary condition S(infinity)=0
 % Estimate new wall shear
 estimate1=(est_f(1)+A*est_f(2))/(1+A);
 estimate2=(est_s(1)+B*est_s(2))/(1+B);
-[eta,f]=ode45(@BlasiusFunction,eta_span,[0 0 estimate1 SW estimate2]);
+[eta,f]=ode45(@coupled_equations,eta_span,[0 0 estimate1 SW estimate2]);
 
 % Perform iterations until wall shear converges below a prescribed tolerance
 it=0;
@@ -51,7 +51,7 @@ while abs(targ_f(2)-1)>tolerance && abs(targ_s(2)-0)>tolerance
     
     estimate1=(est_f(1)+A*est_f(2))/(1+A); % for falkner function boundary condition
     estimate2=(est_s(1)+B*est_s(2))/(1+B); % estimate S function boundary condition
-    [eta,f]=ode45(@BlasiusFunction,eta_span,[0 0 estimate1 SW estimate2]);
+    [eta,f]=ode45(@coupled_equations,eta_span,[0 0 estimate1 SW estimate2]);
 end
 
 figure(1)
